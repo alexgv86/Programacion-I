@@ -3,6 +3,7 @@ Es posible que el codigo generado no sea completamente correcto. Si encuentra
 errores por favor reportelos en el foro (http://pseint.sourceforge.net). */
 
 #include<stdio.h>
+#include<stdlib.h>
 
 /* Para leer variables de texto se utiliza scanf, que lee solo una palabra. 
    Para leer una linea completa (es decir, incluyendo los espacios en blanco)
@@ -13,10 +14,10 @@ errores por favor reportelos en el foro (http://pseint.sourceforge.net). */
 int main() {
 	float numero;
 	float total;
-	printf("Ingresaremos números que se acumularán hasta presionar 0:\n");
+	printf("Ingresaremos numeros que se acumularan hasta presionar 0:\n");
 	do {
-		printf("Ingrese un número: \n");
-		scanf("%s",numero);
+		printf("Ingrese un numero: \n");
+		scanf("%f",&numero);
 		total = total+numero;
 		printf("Total acumulado: %f\n",total);
 	} while (numero!=0);
