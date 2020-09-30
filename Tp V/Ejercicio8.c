@@ -2,21 +2,26 @@
 #include<stdlib.h>
 
 int main(){
-	int sucursal[10];
-	int comprobar,i,suma;
+	double *p,sucursal[10],suma;
+	int comprobar,i;
+	p = &sucursal[0];
 	printf("Ingresaremos cuantas ventas tuvo cada una de las 10 sucursales\n");
-	for(i=0;i<10;i++){
+	for(i=0;i<10;i++,p++){
 		printf("Ingrese las ventas para la sucursal %d\n",i+1);
-			comprobar = (scanf("%d",&sucursal[i]) == 1) ? 1 : 0;
-			suma += sucursal[i];
-			if(comprobar == 0){
+			comprobar = (scanf("%lf",p) == 1) ? 1 : 0;
+			while(getchar()!='\n');
+			while(comprobar == 0){
 				printf("Solo se admiten numeros enteros!\n");
-				return 0;
+				printf("Ingrese un numero entero: ");
+				comprobar = (scanf("%lf",p) == 1) ? 1 : 0;
+				while(getchar()!='\n');
 			}
+			suma += *p;
 	}
-	for(i=0;i<10;i++){
-		printf("La sucursal %d tuvo %d ventas\n",i+1,sucursal[i]);
+	p = &sucursal[0];
+	for(i=0;i<10;i++,p++){
+		printf("La sucursal %d vendio $%.2lf \n",i+1,*p);
 	}
-	printf("\nEl total de ventas es: %d",suma);
+	printf("\nEl total en ventas fue de: $%.2lf",suma);
 	return 0;
 }
