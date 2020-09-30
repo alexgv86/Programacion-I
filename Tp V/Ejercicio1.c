@@ -12,15 +12,30 @@ errores por favor reportelos en el foro (http://pseint.sourceforge.net). */
    otra variable con scanf. */
 
 int main() {
-	float numero;
-	float total;
+	double comprobar,numero,total;
 	printf("Ingresaremos numeros que se acumularan hasta presionar 0:\n");
 	do {
 		printf("Ingrese un numero: \n");
-		scanf("%f",&numero);
-		total = total+numero;
-		printf("Total acumulado: %f\n",total);
+		//Se ingresan datos y se guarda en la variable 'comprobar' si son válidos:
+		comprobar = (scanf("%lf",&numero) == 1) ? 1 : 0;
+		//Se limpia la entrada por teclado:
+		while(getchar()!='\n');
+		//Mientras no se ingresen números, se seguirá pidiendo que se ingresen:
+		while(comprobar == 0){
+			printf("Solo se admiten numeros! \n");
+			printf("Ingrese un numero: ");
+			comprobar = (scanf("%lf",&numero) == 1) ? 1 : 0;
+			while(getchar()!='\n');
+		}
+		//Si se ingresó cero, no se volverá a mostrar el total acumulado.
+		if(numero != 0){
+			//Se va acumulando la suma total en la variable 'total':
+			total = total+numero;
+			printf("Total acumulado: %.2lf \n",total);
+		}
+		//Se termina el do...while cuando se ingresa 0:
 	} while (numero!=0);
+	printf("Programa finalizado.");
 	return 0;
 }
 

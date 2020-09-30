@@ -12,20 +12,44 @@ errores por favor reportelos en el foro (http://pseint.sourceforge.net). */
    otra variable con scanf. */
 
 int main() {
-	float contador,i,numero,promedio,total;
-	printf("En esta ocasion, el ejercicio se divide en 3 partes:\n");
-	printf("Primero ingresamos la cantidad de numeros que vamos a querer ingresar.\n");
-	printf("Segundo, iremos ingresando los numeros respectivos.\n");
-	printf("Por ultimo, el programa devolvera la sumatoria total y el promedio.\n");
-	printf("Ingrese la cantidad de numeros que desea utilizar: \n");
-	scanf("%f",&contador);
-	for (i=1;i<=contador;i+=1) {
+	//Declaro las variables y les asigno cero para que estén limpias:
+	double comprobar,numero,promedio,total = 0;
+	int checkCont,contador,i = 0;
+	printf("El ejercicio se divide en 3 partes:\n"
+			"1) Ingrese la cantidad de numeros que quiera ingresar.\n"
+			"2) Ingrese los numeros respectivos.\n"
+			"3) El programa devolvera el total y el promedio de los valores.\n"
+			"Ingrese la cantidad de numeros que desea utilizar: \n");
+	//Se ingresan datos y se comprueba si son válidos:
+	checkCont = (scanf("%d",&contador) == 1) ? 1 : 0;
+	//Se limpia la entrada por teclado:
+	while(getchar()!='\n');
+	//Se pedirá que se ingrese un número entero:
+	while(checkCont == 0){
+		printf("Solo se admiten numeros enteros! \n Ingrese un numero entero: ");
+		checkCont = (scanf("%d",&contador) == 1) ? 1 : 0;
+		while(getchar()!='\n');
+	}
+	//Se procede al ingreso de los numeros a calcular:
+	for (i=0;i<contador;i++) {
 		printf("Ingrese un numero: \n");
-		scanf("%f",&numero);
+		//Ingreso de datos:
+		comprobar = (scanf("%lf",&numero) == 1) ? 1 : 0;
+		//Limpieza de entrada:
+		while(getchar()!='\n');
+		//Petición de número como ingreso:
+		while(comprobar == 0){
+			printf("Solo se admiten numeros! \n Ingrese un numero: ");
+			comprobar = (scanf("%lf",&numero) == 1) ? 1 : 0;
+			while(getchar()!='\n');
+		}
+		//Se van acumulando los números ingresados:
 		total = total+numero;
 	}
+	//Se calcula el promedio:
 	promedio = total/contador;
-	printf("El total es: %f y el promedio es: %f\n",total,promedio);
+	//Se imprimen los resultados:
+	printf("El total es: %.2lf y el promedio es: %.2lf \n",total,promedio);
 	return 0;
 }
 

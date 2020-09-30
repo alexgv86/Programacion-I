@@ -2,50 +2,102 @@
 #include<stdlib.h>
 
 int main(){
+	//Declaro las primeras variables:
+	int aux,cantZona,cantSuc,cantVend,zona,suc,vend = 0;
+	//Consultamos cuántas zonas, cuantas sucursales y cuantos vendedores hay:
+	printf("Crearemos una empresa: \n");
+	//Zonas:
+	printf("Ingrese cuantas zonas tendra: ");
+	aux = (scanf("%d",&cantZona) == 1) ? 1 : 0;
+	while(getchar()!='\n');
+	while(aux == 0){
+		printf("Error! Ingrese un numero entero: ");
+		aux = (scanf("%d",&cantZona) == 1) ? 1 : 0;
+		while(getchar()!='\n');
+	}
+	//Sucursales:
+	printf("Ingrese cuantas sucursales tendra: ");
+	aux = (scanf("%d",&cantSuc) == 1) ? 1 : 0;
+	while(getchar()!='\n');
+	while(aux == 0){
+		printf("Error! Ingrese un numero entero: ");
+		aux = (scanf("%d",&cantSuc) == 1) ? 1 : 0;
+		while(getchar()!='\n');
+	}
+	//Vendedores:
+	printf("Ingrese cuantos vendedores tendra: ");
+	aux = (scanf("%d",&cantVend) == 1) ? 1 : 0;
+	while(getchar()!='\n');
+	while(aux == 0){
+		printf("Error! Ingrese un numero entero: ");
+		aux = (scanf("%d",&cantVend) == 1) ? 1 : 0;
+		while(getchar()!='\n');
+	}
 	//Empresa dividida en 3 zonas, 4 sucursales y 2 vendedores
-	int zona,suc,vend,cantZona,cantSuc,cantVend;
-	double comprobar,total;
-	total = 0;
+	//Declaro las variables y las pongo en cero:
+	double empresa[cantZona][cantSuc][cantVend],*p,tSuc[cantSuc],tZona[cantZona];
+	double comprobar, total = 0;
+	//Apunto con el puntero al valor inicial del arreglo empresa:
+	p = &empresa[0][0][0];
+	//Pongo en cero la empresa:
+	aux = cantZona*cantSuc*cantVend;
+	for(zona=0;zona<vend;zona++,p++){
+		*p = 0.0;
+	}
+	//Pongo en cero zona y vuelvo a apuntar con p a la empresa:
+	zona = 0;
+	p = &empresa[0][0][0];
+	
 	printf("Totalizaremos todas las ventas de la empresa:\n");
-	printf("Ingrese cuantas zonas tendra la misma:\n");
-	scanf("%d",&cantZona);
-	printf("Ingrese cantidad de sucursales:\n");
-	scanf("%d",&cantSuc);
-	printf("Ingrese cantidad de vendedores por sucursal:\n");
-	scanf("%d",&cantVend);
-	double empresa[cantZona][cantSuc][cantVend];
-	double totZona[cantZona];
-	double totSuc[cantSuc];
+	//Recorro las zonas:
 	for(zona=0;zona<cantZona;zona++){
+		//Recorro las sucursales:
 		for(suc=0;suc<cantSuc;suc++){
-			for(vend=0;vend<cantVend;vend++){
+			//Recorro los vendedores:
+			for(vend=0;vend<cantVend;vend++,p++){
 				printf("Ingrese las ventas para el vendedor %d "
 						"de la sucursal %d de la zona %d\n",
-						vend+1,suc+1,vend+1);
-					comprobar = (scanf("%lf",&empresa[zona][suc][vend]) == 1) ? 1 : 0;
-					if(comprobar == 0){
-						printf("Solo se admiten numeros!\n");
-						return 0;
+						vend+1,suc+1,zona+1);
+					//Ingreso y compruebo los valores ingresados:
+					comprobar = (scanf("%lf",p) == 1) ? 1 : 0;
+					//Purgo la entrada de teclado:
+					while(getchar()!='\n');
+					//Solicito valores válidos:
+					while(comprobar == 0){
+						printf("Error! Ingrese un numero: ");
+						comprobar = (scanf("%lf",p) == 1) ? 1 : 0;
+						while(getchar()!='\n');
 					}
 			}
 		}
 	}
+	//Vuelvo a apuntar al comienzo de la empresa con el puntero:
+	p = &empresa[0][0][0];
+	//Recorro por zona:
 	for(zona=0;zona<cantZona;zona++){
-		totZona[zona]=0;
-		printf("\n\nEn la zona %d se obtuvieron los siguientes resultados:",zona+1);
+		//Pongo tZona[zona] en cero:
+		tZona[zona] = 0;
+		printf("\n\nEn la zona %d se obtuvieron los siguientes resultados: \n",zona+1);
+		//Recorro por sucursal:
 		for(suc=0;suc<cantSuc;suc++){
-			totSuc[suc]=0;
-			printf("\nLa sucursal %d obtuvo:\n",suc+1);
-			for(vend=0;vend<cantVend;vend++){
-				totSuc[suc] = totSuc[suc]+empresa[zona][suc][vend];
-				printf("Vendedor %d : $%.2lf\n",vend+1,empresa[zona][suc][vend]);
+			//Pongo tSuc[suc] en cero:
+			tSuc[suc] = 0;
+			//Recorro por vendedor y voy sumando al puntero:
+			for(vend=0;vend<cantVend;vend++,p++){
+				tSuc[suc] = tSuc[suc]+*p;
+				//Había asignado para que muestre por vendedor:
+				//printf("Vendedor %d : $%.2lf\n",vend+1,empresa[zona][suc][vend]);
 			}
-			printf("Total de la sucursal %d: $%.2lf\n",suc+1,totSuc[suc]);
-			totZona[zona] = totZona[zona] + totSuc[suc];
+			//Imprimo los resultados por sucursal:
+			printf("La sucursal %d obtuvo: $%.2lf \n",suc+1,tSuc[suc]);
+			tZona[zona] = tZona[zona] + tSuc[suc];
 		}
-		printf("\nTotal de la zona %d: $%.2lf",zona+1,totZona[zona]);
-		total += totZona[zona];
+		//Total de cada zona:
+		printf("Total: $%.2lf",tZona[zona]);
+		//Sumalizo el total general:
+		total += tZona[zona];
 	}
-	printf("\nEl total de ventas es: $%.2lf",total);
+	//Imprimo el resultado final:
+	printf("\n\n El total general es: $%.2lf",total);
 	return 0;
 }

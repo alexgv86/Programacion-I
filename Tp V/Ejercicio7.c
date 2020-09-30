@@ -2,26 +2,33 @@
 #include<stdlib.h>
 
 int main(){
-	double comprobar,*p,sucursal[10];
-	int i;
+	//Declaro las variables y asigno valor cero para limpiar registros:
+	double comprobar = 0;
+	double *p,sucursal[10];
+	int i = 0;
 	printf("Ingresaremos el total de ventas que tuvo cada una de las 10 sucursales\n");
+	//Asigno al puntero 'p' la dirección de memoria del inicio de 'sucursal[]':
 	p = &sucursal[0];
-	for (i=0;i<10;i++){
-		*p = 0.0;
-	}
+	//Comenzamos a recorrer el arreglo, utilizando i y *p
 	for(i=0;i<10;i++,p++){
 		printf("Ingrese cuanto vendio la sucursal %d\n",i+1);
+			//Comprobamos datos ingresados:
 			comprobar = (scanf("%lf",p) == 1) ? 1 : 0;
+			//Purgamos entrada de teclado:
 			while(getchar()!='\n');
+			//Pedimos datos correctos:
 			while(comprobar == 0){
-				printf("Solo se admiten numeros enteros!\n");
+				printf("Solo se admiten numeros!\n");
 				printf("Ingrese un numeros entero: ");
 				comprobar = (scanf("%lf", p) == 1) ? 1 : 0;
 				while(getchar()!='\n');
 			}
 		}
-	for(i=0;i<10;i++){
-		printf("La sucursal %d vendio $%.2lf \n",i+1,sucursal[i]);
+	//Vuelvo a asignar la dirección de inicio de sucursal[] al puntero:
+	p = &sucursal[0];
+	//Imprimimos los resultados:
+	for(i=0;i<10;i++,p++){
+		printf("La sucursal %d vendio $%.2lf \n",i+1,*p);
 	}
 	return 0;
 }

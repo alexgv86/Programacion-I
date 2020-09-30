@@ -2,29 +2,34 @@
 #include<stdlib.h>
 
 int main(){
-	int sucursal[3][5];
-	int comprobar,i,j,aux,suma;
-	aux = 0;
-	suma = 0;
+	//Declaro las variables:
+	double comprobar,sucursal[3][5],suma;
+	int i,j = 0;
 	printf("Ingrese cuantas ventas tuvo cada vendedor de cada sucursal\n");
+	//Ingreso los valores:
 	for(i=0;i<3;i++){
 		for(j=0;j<5;j++){
-			printf("Ingrese las ventas para el vendedor %d de la sucursal %d\n",j+1,i+1);
-				comprobar = (scanf("%d",&sucursal[i][j]) == 1) ? 1 : 0;
-				if(comprobar == 0){
-					printf("Solo se admiten numeros enteros!\n");
-					return 0;
+			printf("Ingrese lo vendido por el vendedor %d de la sucursal %d\n",j+1,i+1);
+				//Comprobamos el ingreso de datos:
+				comprobar = (scanf("%lf",&sucursal[i][j]) == 1) ? 1 : 0;
+				//Purgo lo ingresado por teclado:
+				while(getchar()!='\n');
+				//Solicito datos correctos:
+				while(comprobar == 0){
+					printf("Error! Ingrese un numero: ");
+					comprobar = (scanf("%lf",&sucursal[i][j]) == 1) ? 1 : 0;
+					while(getchar()!='\n');
 				}
 		}
 	}
+	//Imprimo los resultados
 	for(i=0;i<3;i++){
 		for(j=0;j<5;j++){
-			aux += sucursal[i][j];
+			suma += sucursal[i][j];
 		}
-		printf("La sucursal %d tuvo %d ventas\n",i+1,aux);
-		suma += aux;
-		aux = 0;
+		printf("La sucursal %d vendio: $%.2lf \n",i+1,suma);
+		suma = 0;
 	}
-	printf("\nEl total de ventas es: %d",suma);
+	printf("\n Fin del programa");
 	return 0;
 }

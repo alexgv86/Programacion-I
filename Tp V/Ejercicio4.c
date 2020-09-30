@@ -12,43 +12,60 @@ errores por favor reportelos en el foro (http://pseint.sourceforge.net). */
    otra variable con scanf. */
 
 int main() {
-	float comprobar,contador,i,mayor,menor,numero,promedio;
-	float total=0;
-	printf("En esta ocasion, el ejercicio se divide en 3 partes:\n");
-	printf("Primero ingresamos la cantidad de numeros que vamos a querer ingresar.\n");
-	printf("Segundo, iremos ingresando los numeros respectivos.\n");
-	printf("Por ultimo, el programa devolvera la sumatoria total, el promedio, tanto como el numero mayor y el menor ingresado.\n");
-	printf("Ingrese la cantidad de numeros que desea utilizar: \n");
-	comprobar = scanf("%f",&contador) == 1 ? 1 : 0;
-	if(comprobar == 1){
-		for (i=1;i<=contador;i+=1) {
-			printf("Ingrese un numero: \n");
-			comprobar = scanf("%f",&numero) == 1 ? 1 : 0;
-			if(comprobar ==1){
-				total = total+numero;
-				if (i==1) {
-					mayor = numero;
-					menor = numero;
-				} else {
-					if (numero>mayor) {
-						mayor = numero;
-					} else {
-						if (numero<menor) {
-							menor = numero;
-						}
-					}
-				}
-			}else{
-				printf("Solo se admiten numeros!");
-				return 0;
-			}
+	//Declaro las variables y les asigno cero para que estén limpias:
+	double comprobar,numero,promedio,total = 0;
+	//Los valores mínimos y máximos no se inicializan por si el usuario
+	//ingresa valores negativos:
+	double min,max;
+	int checkCont,contador,i = 0;
+	printf("El ejercicio se divide en 3 partes:\n"
+			"1) Ingrese la cantidad de numeros que quiera ingresar.\n"
+			"2) Ingrese los numeros respectivos.\n"
+			"3) El programa devolvera el total y el promedio de los valores.\n"
+			"Ingrese la cantidad de numeros que desea utilizar: \n");
+	//Se ingresan datos y se comprueba si son válidos:
+	checkCont = (scanf("%d",&contador) == 1) ? 1 : 0;
+	//Se limpia la entrada por teclado:
+	while(getchar()!='\n');
+	//Se pedirá que se ingrese un número entero:
+	while(checkCont == 0){
+		printf("Solo se admiten numeros enteros! \n Ingrese un numero entero: ");
+		checkCont = (scanf("%d",&contador) == 1) ? 1 : 0;
+		while(getchar()!='\n');
+	}
+	//Se procede al ingreso de los numeros a calcular:
+	for (i=0;i<contador;i++) {
+		printf("Ingrese un numero: \n");
+		//Ingreso de datos:
+		comprobar = (scanf("%lf",&numero) == 1) ? 1 : 0;
+		//Limpieza de entrada:
+		while(getchar()!='\n');
+		//Petición de número como ingreso:
+		while(comprobar == 0){
+			printf("Solo se admiten numeros! \n Ingrese un numero: ");
+			comprobar = (scanf("%lf",&numero) == 1) ? 1 : 0;
+			while(getchar()!='\n');
 		}
-		promedio = total/contador;
-		printf("El total es: %f y el promedio es: %f\n",total,promedio);
-		printf("El valor mas pequeno ingresado es: %f y el mas grande ingresado es: %f\n",menor,mayor);
-		return 0;
-		}else{
-			printf("Solo se admiten numeros!");
-			return 0;}
+		//Se asigna el primer valor al mínimo y al máximo:
+		if(i==0){
+			min = max = numero;
+		}
+		//Si el número es mayor a 'max', se asigna al mismo su valor:
+		if(numero > max)
+			max = numero;
+		//Si el número es menor a 'min', se asigna al mismo su valor:
+		if(numero < min)
+			min = numero;
+		//Se van acumulando los números ingresados:
+		total = total+numero;
+	}
+	//Se calcula el promedio:
+	promedio = total/contador;
+	//Se imprimen los resultados:
+	printf("El total es: %.2lf \n",total);
+	printf("El promedio es: %.2lf \n",promedio);
+	printf("El menor valor ingresado es: %.2lf \n",min);
+	printf("El mayor valor ingresado es: %.2lf \n",max);
+	return 0;
 }
 

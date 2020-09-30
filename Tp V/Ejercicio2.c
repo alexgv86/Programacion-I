@@ -12,18 +12,34 @@ errores por favor reportelos en el foro (http://pseint.sourceforge.net). */
    otra variable con scanf. */
 
 int main() {
-	float contador,numero,promedio,total;
+	double comprobar,contador,numero,promedio,total = 0;
 	printf("Ingresaremos numeros y terminaremos al ingresar 0.\n");
 	printf("Por ultimo se mostrara la sumatoria y el promedio total.\n");
-	contador = -1;
 	do {
 		printf("Ingrese un numero: \n");
-		scanf("%f",&numero);
+		//Asigno a 'comprobar' si es válido el valor ingresado:
+		comprobar = (scanf("%lf",&numero) == 1) ? 1 : 0;
+		//Purgo la entrada por teclado:
+		while(getchar()!='\n');
+		//Mientras el valor asignado sea inválido, se pedirá un valor correcto:
+		while(comprobar == 0)
+		{
+			printf("Solo se admiten numeros! \n");
+			printf("Ingrese un numero: ");
+			comprobar = (scanf("%lf",&numero) == 1) ? 1 : 0;
+			while(getchar()!='\n');
+		}
+		//Se va acumulando lo ingresado en 'total'
 		total = total+numero;
-		contador = contador+1;
+		//Si ingreso cero, no incrementa el contador para que el promedio sea correcto:
+		if(numero != 0)
+			contador++;
+		//El do...while termina al ingresar cero:
 	} while (numero!=0);
+	//Saco el promedio:
 	promedio = total/contador;
-	printf("El total es: %f y el promedio es: %f\n",total,promedio);
+	//Imprimo los resultados:
+	printf("El total es: %.2lf y el promedio es: %.2lf\n",total,promedio);
 	return 0;
 }
 
