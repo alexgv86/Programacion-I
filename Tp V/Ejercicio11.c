@@ -1,10 +1,17 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 
 int main(){
 	//Empresa dividida en 3 zonas, 4 sucursales y 2 vendedores
 	//Declaro las variables y las pongo en cero:
 	double empresa[3][4][2],*p,tSuc[4],tZona[3];
+	//Asigno cero a los arreglos, apuntando su primer valor, luego
+	//la asignación que es cero y luego la cantidad de valores
+	//multiplicado por el tamaño de su tipo de variable
+	memset(&empresa[0][0][0],0,3*4*2*sizeof(double));
+	memset(&tSuc[0],0,4*sizeof(double));
+	memset(&tZona[0],0,3*sizeof(double));
 	double comprobar = 0;
 	int zona,suc,vend = 0;
 	//Apunto con el puntero al valor inicial del arreglo empresa:
@@ -24,7 +31,7 @@ int main(){
 		for(suc=0;suc<4;suc++){
 			//Recorro los vendedores:
 			for(vend=0;vend<2;vend++,p++){
-				printf("Ingrese las ventas para el vendedor %d "
+				printf("Ingrese cuanto vendio el vendedor %d "
 						"de la sucursal %d de la zona %d\n",
 						vend+1,suc+1,zona+1);
 					//Ingreso y compruebo los valores ingresados:

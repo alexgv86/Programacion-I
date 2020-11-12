@@ -1,9 +1,14 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 
 int main(){
-	//Declaro las variables:
+	//Declaro las variables y les asigno cero para iniciar:
 	double *p,sucursal[10],suma;
+	//Asigno cero a los arreglos, apuntando su primer valor, luego
+	//la asignación que es cero y luego la cantidad de valores
+	//multiplicado por el tamaño de su tipo de variable
+	memset(&sucursal[0],0,10*sizeof(double));
 	int comprobar,i = 0;
 	//Asigno al puntero 'p' la dirección de memoria del inicio de sucursal[]:
 	p = &sucursal[0];

@@ -41,13 +41,11 @@ int main(){
 	//Apunto con el puntero al valor inicial del arreglo empresa:
 	p = &empresa[0][0][0];
 	//Pongo en cero la empresa:
-	aux = cantZona*cantSuc*cantVend;
-	for(zona=0;zona<vend;zona++,p++){
-		*p = 0.0;
-	}
-	//Pongo en cero zona y vuelvo a apuntar con p a la empresa:
-	zona = 0;
-	p = &empresa[0][0][0];
+	memset(&empresa[0][0][0],0,cantZona*cantSuc*cantVend*sizeof(double));
+	//Pongo en cero tSuc:
+	memset(&tSuc[0],0,cantSuc*sizeof(double));
+	//Pongo en cero tZona:
+	memset(&tZona[0],0,cantZona*sizeof(double));
 	
 	printf("Totalizaremos todas las ventas de la empresa:\n");
 	//Recorro las zonas:

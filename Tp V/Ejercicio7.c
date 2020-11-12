@@ -1,10 +1,15 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 
 int main(){
 	//Declaro las variables y asigno valor cero para limpiar registros:
 	double comprobar = 0;
 	double *p,sucursal[10];
+	//Asigno cero a los arreglos, apuntando su primer valor, luego
+	//la asignación que es cero y luego la cantidad de valores
+	//multiplicado por el tamaño de su tipo de variable
+	memset(&sucursal[0],0,10*sizeof(double));
 	int i = 0;
 	printf("Ingresaremos el total de ventas que tuvo cada una de las 10 sucursales\n");
 	//Asigno al puntero 'p' la dirección de memoria del inicio de 'sucursal[]':
