@@ -25,27 +25,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//Prototipo
-char *ingreso();
+#include <consola.h>
 
 int main(int argc, char **argv){
 	printf("Ingrese un texto de hasta 30 caracteres: ");
-	char *p = ingreso();
+	char *p = ingreso1();
 	printf("Usted ingresó: %s \n",p);
 	free(p);//Libero memoria asignada a ingreso.
 	return 0;
-}
-//Implemento función:
-char *ingreso(){
-//Creo una variable buffer para establecer el límite y con espacio para \0
-	char buffer[31];
-	int i = 0;
-	char c = 0;
-	while((c = getchar()) != '\n' && i < 30){
-		buffer[i] = c;
-		i++;
-	}
-	buffer[i]='\0';
-	return strdup(buffer);//Retorno un duplicado del vector buffer.
 }
 
