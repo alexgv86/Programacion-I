@@ -30,7 +30,7 @@
 int main(int argc, char **argv){
 	printf("Ingrese un texto de hasta 30 caracteres: ");
 	char *p = ingreso3(30);
-	printf("\nUsted ingresó: %s \n",p);
+	printf("\nUsted ingresó: [%s] \n",p);
 	free(p);//Libero memoria asignada a ingreso.
 	return 0;
 }

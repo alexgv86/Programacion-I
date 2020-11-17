@@ -44,23 +44,28 @@ char *ingreso1(){
 //Implemento funcion para ejercicio 2:
 char *ingreso2(){
 //Creo una variable buffer para establecer el límite y con espacio para \0
-	int bloque = 128; //Ajusto tamano de los bloques
+	int bloque = 32; //Ajusto tamano de los bloques
 	int nBloque = 1; //Numero de bloques asignados
 	long n = 0; //Numero de caracter ingresado
 	char c = 0; //Valor del caracter ingresado
 	char *pInicio= (char *) malloc(nBloque*bloque);
 	while((c = getchar()) != '\n'){
-		if(n>0 && (n % bloque) == 0){
+		if((n % bloque) == 0){
 			//Si n llega al tamano del bloque, este se lleno, y por lo tanto
 			// tengo que generar otro.
-			nBloque++;
-			printf("Tengo %li digitos y %d bloques de %d bytes\n",n,nBloque,bloque);
+			if(n>0){
+				nBloque++;
+				printf("n vale %li y agrego %d bloques de %d bytes\n",n,nBloque,bloque);
+			}else{
+				printf("Agrego el %der bloque de %d bytes\n",nBloque,bloque);
+			}
 			pInicio = (char *) realloc(pInicio,nBloque*bloque);
 			if(pInicio == NULL) return NULL;
 		}
 		*(pInicio+n) = c;
 		n++;
 	}
+	printf("Numero total de n es: %li y utilizamos %d bloques de %d bytes \n",n,nBloque,bloque);
 	*(pInicio+n) = '\0';
 	return pInicio; //Asigna memoria
 	
@@ -81,3 +86,5 @@ char *ingreso3(int largo){
 	buffer[i]='\0';
 	return buffer;//Retorno el puntero buffer.
 }
+
+int ingreso4(char *lineas[],int n);

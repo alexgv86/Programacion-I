@@ -28,7 +28,7 @@
 #include <consola.h>
 
 int main(int argc, char **argv){
-	printf("Ingrese un texto de hasta 30 caracteres: ");
+	printf("Ingrese un texto cualquiera: ");
 	char *p = ingreso2();
 	printf("\nUsted ingresó: %s \n",p);
 	free(p);//Libero memoria asignada a ingreso.
