@@ -41,10 +41,15 @@ char *ingreso(){
 	char buffer[31];
 	int i = 0;
 	char c = 0;
+	/*Mientras si lo que asigno a c (el caracter) es distinto a un salto
+	de linea y menor a 30, seguir*/
 	while((c = getchar()) != '\n' && i < 30){
+		//Asigno el caracter en la posicion i de buffer
 		buffer[i] = c;
+		//Sumo 1 a i para seguir recorriendo buffer
 		i++;
 	}
+	//Luego de terminar el recorrido, agrego el valor nulo al final del buffer
 	buffer[i]='\0';
 	return strdup(buffer);//Retorno un duplicado del vector buffer.
 }

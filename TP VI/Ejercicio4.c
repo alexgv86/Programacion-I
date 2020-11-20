@@ -28,14 +28,20 @@
 #include <consola.h>
 
 int main(int argc, char **argv){
-	printf("Ingrese un texto de hasta 30 caracteres: ");
-	/*Asigno al puntero p el resultado de lo ingresado a la funcion de
-	este ejercicio*/
-	char *p = ingreso1();
-	//Imprimo los resultados
-	printf("Usted ingresó: %s \n",p);
-	//Libero memoria
-	free(p);//Libero memoria asignada a ingreso.
+	//Creo las variables
+	int i;
+	char *lineas[4];
+	//Asigno cero al los valores del puntero lineas
+	memset(lineas,0,sizeof(char *)*4);
+	printf("Ingrese 4 lineas de texto: \n ");
+	//Asigno a la funcion de este ejercicio las 4 lineas
+	ingreso4(lineas,4);
+	//Recorro los resultados y los imprimo
+	for(i = 0;i<4;i++){
+		printf("En la linea numero %d ingreso: %s \n",i,lineas[i]);
+		//Si la linea es NULL, se llego al final y se libera memoria
+		if(lineas[i]!=NULL) free(lineas[i]);
+	}
 	return 0;
 }
 

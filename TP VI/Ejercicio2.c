@@ -29,8 +29,11 @@
 
 int main(int argc, char **argv){
 	printf("Ingrese un texto cualquiera: ");
+	/*Utilizo la funcion del ejercicio para ingresar texto y devuelvo el
+	resultado al puntero p */
 	char *p = ingreso2();
-	printf("\nUsted ingresó: %s \n",p);
+	//Imprimo el resultado
+	printf("\nUsted ingreso: %s \n",p);
 	free(p);//Libero memoria asignada a ingreso.
 	return 0;
 }

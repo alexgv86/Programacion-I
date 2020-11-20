@@ -28,14 +28,14 @@
 #include <consola.h>
 
 int main(int argc, char **argv){
-	printf("Ingrese un texto de hasta 30 caracteres: ");
-	/*Asigno al puntero p el resultado de lo ingresado a la funcion de
-	este ejercicio*/
-	char *p = ingreso1();
-	//Imprimo los resultados
-	printf("Usted ingresó: %s \n",p);
-	//Libero memoria
-	free(p);//Libero memoria asignada a ingreso.
+	/*Creo un puntero a un arreglo char y le asigno valores y NULL
+	al final para identificar donde termina*/
+	char *arrayOpciones[] = { "Altas", "Bajas", "Listado", NULL };
+	/*Asigno a la variable opcion el resultado de asignar un titulo
+	y el puntero al arreglo char*/
+	int opcion = menu("MENU CLIENTES",arrayOpciones);
+	//Imprimo el resultado de la opcion seleccionada una vez que sea correcta
+	printf("Ud selecciono la opcion de menu %d\n",opcion);
 	return 0;
 }
 

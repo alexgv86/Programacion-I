@@ -1,5 +1,5 @@
 /*
- * Ejercicio1.c
+ * Ejercicio3.c
  * 
  * Copyright 2020 Alejandro Gonzalez Videla <flia@PowerGv>
  * 
@@ -29,8 +29,12 @@
 
 int main(int argc, char **argv){
 	printf("Ingrese un texto de hasta 30 caracteres: ");
+	/*Asigno un limite de 30 al ingreso de la funcion de este ejercicio
+	y devuelvo el resultado al puntero p*/
 	char *p = ingreso3(30);
+	//Imprimo el resultado
 	printf("\nUsted ingresó: [%s] \n",p);
+	//Libero memoria
 	free(p);//Libero memoria asignada a ingreso.
 	return 0;
 }
